@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build - Compile TypeScript",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$tsc"],
+      "isBackground": false
+    },
+    {
+      "label": "Dev - Run Spec Tester",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev", "--", "sample-api.json"],
+      "group": {
+        "kind": "build"
+      },
+      "isBackground": false,
+      "dependsOn": ["Build - Compile TypeScript"]
+    },
+    {
+      "label": "Lint - Check Code",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": {
+        "kind": "test"
+      },
+      "problemMatcher": ["$eslint - stylish"]
+    }
+  ]
+}
