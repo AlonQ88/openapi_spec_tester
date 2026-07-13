@@ -14,7 +14,7 @@
       "isBackground": false
     },
     {
-      "label": "Dev - Run Spec Tester",
+      "label": "Dev - Run Spec Tester (CLI)",
       "type": "shell",
       "command": "npm",
       "args": ["run", "dev", "--", "sample-api.json"],
@@ -23,6 +23,18 @@
       },
       "isBackground": false,
       "dependsOn": ["Build - Compile TypeScript"]
+    },
+    {
+      "label": "Dev - Run Web Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev:web"],
+      "group": {
+        "kind": "build"
+      },
+      "isBackground": true,
+      "dependsOn": ["Build - Compile TypeScript"],
+      "problemMatcher": []
     },
     {
       "label": "Lint - Check Code",

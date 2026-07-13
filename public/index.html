@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAPI Spec Tester</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🧪 OpenAPI Spec Tester</h1>
+            <p class="subtitle">Generate and execute tests based on OpenAPI specifications</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Step 1: Upload Spec -->
+            <section class="panel step-1">
+                <h2>Step 1: Upload OpenAPI Spec</h2>
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p>Drag and drop your OpenAPI spec file here</p>
+                    <p class="text-muted">or</p>
+                    <input type="file" id="specFile" accept=".json,.yaml,.yml" style="display: none;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('specFile').click()">
+                        Browse Files
+                    </button>
+                </div>
+                <div id="uploadStatus" class="upload-status"></div>
+            </section>
+
+            <!-- Step 2: Spec Information -->
+            <section class="panel step-2" id="step2" style="display: none;">
+                <h2>Step 2: Specification Details</h2>
+                <div id="specDetails" class="spec-details"></div>
+            </section>
+
+            <!-- Step 3: Generated Tests -->
+            <section class="panel step-3" id="step3" style="display: none;">
+                <h2>Step 3: Generated Test Requests</h2>
+                <div class="tests-summary">
+                    <p>Total test requests generated: <span id="testCount">0</span></p>
+                    <button class="btn btn-primary" onclick="runTests()" id="runTestsBtn">
+                        Run Tests
+                    </button>
+                </div>
+                <div id="testsList" class="tests-list"></div>
+            </section>
+
+            <!-- Step 4: Test Results -->
+            <section class="panel step-4" id="step4" style="display: none;">
+                <h2>Step 4: Test Results</h2>
+                <div id="resultsStatus" class="results-status"></div>
+                <div id="resultsList" class="results-list"></div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 OpenAPI Spec Tester | Built with TypeScript & Express</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -35,24 +35,26 @@ export interface RequestBodyDetail {
   content: Record<string, unknown>;
 }
 
-export async function parseOpenAPISpec(specPath: string): Promise<ParsedOpenAPISpec> {
+export async function parseOpenAPISpec(specPathOrObj: string | any): Promise<ParsedOpenAPISpec> {
   try {
-    // Read the spec file
-    const filePath = path.resolve(specPath);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    
     let api: any;
-    
-    // Parse based on file type
-    if (specPath.endsWith('.json')) {
-      api = JSON.parse(fileContent);
-    } else if (specPath.endsWith('.yaml') || specPath.endsWith('.yml')) {
-      // For YAML files, we'll need to parse manually or use a simple approach
-      // For now, we'll attempt JSON parsing first, then throw if it fails
-      api = JSON.parse(fileContent);
+
+    // Handle both file path and object
+    if (typeof specPathOrObj === 'string') {
+      // Read from file
+      const filePath = path.resolve(specPathOrObj);
+      const fileContent = fs.readFileSync(filePath, 'utf-8');
+      
+      if (specPathOrObj.endsWith('.json')) {
+        api = JSON.parse(fileContent);
+      } else if (specPathOrObj.endsWith('.yaml') || specPathOrObj.endsWith('.yml')) {
+        api = JSON.parse(fileContent);
+      } else {
+        api = JSON.parse(fileContent);
+      }
     } else {
-      // Try JSON first
-      api = JSON.parse(fileContent);
+      // Already an object
+      api = specPathOrObj;
     }
     
     const baseUrl = api.servers?.[0]?.url || 'http://localhost:3000';
